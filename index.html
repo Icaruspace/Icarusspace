@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icarus Space</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Onest:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./src/output.css">
+</head>
+<body class="bg-void text-chalk font-sans antialiased">
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="cur" id="cur" aria-hidden="true"></div>
+  <div class="cur-dot" id="curDot" aria-hidden="true"></div>
+
+  <div class="lang-fx" id="langFx" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="page-fx" aria-hidden="true">
+    <div class="fx-aurora"><b></b><b></b><b></b></div>
+    <canvas class="fx-net" id="fxNet"></canvas>
+    <div class="fx-grid" id="fxGrid"></div>
+    <div class="fx-grain"></div>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Section progress">
+    <a href="#problems" data-i18n-attr="rail-problems" data-label="PROBLEMS"><i></i></a>
+    <a href="#mission"  data-i18n-attr="rail-mission"  data-label="MISSION"><i></i></a>
+    <a href="#projects" data-i18n-attr="rail-projects" data-label="PROJECTS"><i></i></a>
+    <a href="#about"    data-i18n-attr="rail-about"    data-label="ABOUT"><i></i></a>
+    <a href="#team"     data-i18n-attr="rail-team"     data-label="TEAM"><i></i></a>
+    <a href="#contact"  data-i18n-attr="rail-contact"  data-label="CONTACT"><i></i></a>
+  </nav>
+
+  <!-- ═══ NAV ═══ -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-void/60 backdrop-blur-md border-b border-line/60">
+    <nav class="mx-auto max-w-[1600px] px-6 lg:px-10 h-[68px] flex items-center justify-between">
+
+      <a href="#" class="flex items-center gap-2.5">
+        <svg viewBox="0 0 100 190" class="h-12 w-auto" aria-hidden="true">
+          <g fill="#EDF1F8">
+            <path d="M50 54 C54 115.7 45.3 105 92 108 C45.3 111 54 92 50 187 C46 92 54.7 111 8 108 C54.7 105 46 115.7 50 54 Z"/>
+            <path d="M50 4 Q54 24 50 44 Q46 24 50 4 Z"/>
+            <path d="M37 24 Q50 28 63 24 Q50 20 37 24 Z"/>
+            <g transform="rotate(45 50 24)">
+              <path d="M50 15 Q52.8 24 50 33 Q47.2 24 50 15 Z"/>
+              <path d="M41 24 Q50 26.8 59 24 Q50 21.2 41 24 Z"/>
+            </g>
+          </g>
+        </svg>
+        <span class="font-display text-[15px] tracking-tight">Icarus Space</span>
+      </a>
+
+      <ul class="hidden xl:flex items-center gap-7 text-[14px] text-mist">
+        <li><a href="#mission"  class="hover:text-chalk transition" data-i18n="nav-mission">Vision &amp; mission</a></li>
+        <li><a href="#projects" class="hover:text-chalk transition" data-i18n="nav-projects">Our projects</a></li>
+        <li><a href="#about"    class="hover:text-chalk transition" data-i18n="nav-about">About us</a></li>
+        <li><a href="#team"     class="hover:text-chalk transition" data-i18n="nav-team">Team</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <button type="button" id="langToggle" class="lang-toggle" aria-label="Switch language / Хэл солих" aria-pressed="false">
+          <svg class="lang-toggle-track" viewBox="0 0 112 38" preserveAspectRatio="none" aria-hidden="true">
+            <path class="lang-toggle-arc" d="M14 27 Q56 6 98 27" />
+            <circle class="lang-toggle-node lang-toggle-node--en" cx="14" cy="27" r="1.7" />
+            <circle class="lang-toggle-node" cx="56" cy="6" r="1.7" />
+            <circle class="lang-toggle-node lang-toggle-node--mn" cx="98" cy="27" r="1.7" />
+          </svg>
+          <span class="lang-toggle-sat" aria-hidden="true"></span>
+          <span class="lang-toggle-opt" data-l="en">EN</span>
+          <span class="lang-toggle-opt" data-l="mn">МН</span>
+        </button>
+        <a href="#contact" class="rounded-full bg-chalk text-void px-5 py-2 text-[14px] font-medium hover:bg-white transition" data-i18n="nav-contact">
+          Contact us
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="relative min-h-[100svh] flex items-center isolate">
+
+    <div class="stage">
+      <div class="ec-scroll">
+        <div class="eclipse">
+          <div class="ec-bloom"></div>
+          <div class="ec-photosphere"></div>
+          <div class="ec-moon"></div>
+          <div class="ec-orbit">
+            <div class="ec-limb">
+              <div class="ec-flare"></div>
+              <div class="ec-wisp b"></div>
+              <div class="ec-wisp a"></div>
+              <div class="ec-wisp c"></div>
+              <div class="ec-streak"></div>
+              <div class="ec-streak vert"></div>
+              <div class="ec-bead"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative z-20 mx-auto max-w-[1600px] w-full px-6 lg:px-10 pt-32 pb-24">
+      <div class="max-w-4xl hero-rise">
+
+        <h1 class="font-display font-light leading-[0.98] tracking-[-0.03em] text-[clamp(2.9rem,7vw,5.6rem)]">
+          ICARUS SPACE<br>
+          <span class="bg-gradient-to-r from-corona via-[#DCFCE7] to-limb bg-clip-text text-transparent" data-i18n="hero-tagline">
+            open to the sky
+          </span>
+        </h1>
+
+        <p class="mt-8 max-w-2xl text-[16px] leading-relaxed text-mist" data-i18n="hero-desc">
+          Icarus Space is a Mongolian based space technology startup dedicated to
+          developing AI powered Earth observation, environmental monitoring, and
+          climate resilience solutions. By combining proprietary machine learning
+          models and next generation LEO remote sensing with a reusable, low cost
+          space transport system, we are creating Mongolia's most resilient
+          end-to-end space platform infrastructure, trained on Mongolia's extreme
+          environment.
+        </p>
+
+      </div>
+    </div>
+
+    <div class="cue" aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>NDVI <b>·</b> NDWI <b>·</b> <span data-i18n="mq-1c">8 CRITICAL INDICES</span></span>
+      <span><b>1.6 m²</b> <span data-i18n="mq-2b">PER PIXEL</span></span>
+      <span><span data-i18n="mq-3a">STRATOSPHERIC BALLOON</span> <b>·</b> <span data-i18n="mq-3b">30 TO 40 KM</span></span>
+      <span data-i18n="mq-4">REUSABLE LAUNCH INFRASTRUCTURE</span>
+      <span><span data-i18n="mq-5a">30 YEARS</span> <span data-i18n="mq-5b">OF NATIONAL CLIMATE DATA</span></span>
+      <span>LEO <span data-i18n="mq-6">REMOTE SENSING</span></span>
+      <span><span data-i18n="mq-7a">CLOUD SEEDING</span> <b>·</b> <span data-i18n="mq-7b">47 SITES</span></span>
+      <span><span data-i18n="mq-8a">ULAANBAATAR</span> <b>·</b> <span data-i18n="mq-8b">MONGOLIA</span></span>
+
+      <span>NDVI <b>·</b> NDWI <b>·</b> <span data-i18n="mq-1c">8 CRITICAL INDICES</span></span>
+      <span><b>1.6 m²</b> <span data-i18n="mq-2b">PER PIXEL</span></span>
+      <span><span data-i18n="mq-3a">STRATOSPHERIC BALLOON</span> <b>·</b> <span data-i18n="mq-3b">30 TO 40 KM</span></span>
+      <span data-i18n="mq-4">REUSABLE LAUNCH INFRASTRUCTURE</span>
+      <span><span data-i18n="mq-5a">30 YEARS</span> <span data-i18n="mq-5b">OF NATIONAL CLIMATE DATA</span></span>
+      <span>LEO <span data-i18n="mq-6">REMOTE SENSING</span></span>
+      <span><span data-i18n="mq-7a">CLOUD SEEDING</span> <b>·</b> <span data-i18n="mq-7b">47 SITES</span></span>
+      <span><span data-i18n="mq-8a">ULAANBAATAR</span> <b>·</b> <span data-i18n="mq-8b">MONGOLIA</span></span>
+    </div>
+  </div>
+
+  <!-- ═══ PROBLEMS ═══ -->
+  <section id="problems" class="relative py-24 lg:py-32 px-6 lg:px-10 glow glow-amber glow-bl">
+    <div class="mx-auto max-w-[1600px] grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+      <div class="lg:col-span-7">
+        <h2 class="section-title dec">
+          <span data-i18n="prob-h2-a">Problems in</span> <span class="text-amber" data-i18n="prob-h2-b">Mongolia</span>
+        </h2>
+
+        <div class="mt-10 border-l border-line pl-6">
+          <p class="font-mono text-[11px] tracking-[0.2em] text-amber mb-4" data-i18n="prob-land-label">THE LAND</p>
+          <p class="text-[16px] leading-relaxed text-mist">
+            <span data-i18n="prob-land-before">Around</span>
+            <span class="num text-amber" data-count="77" data-suffix="%">0%</span>
+            <span data-i18n="prob-land-after">of Mongolia's land is already degraded,
+            and the eight forces driving it, overgrazing, deforestation, steppe fires,
+            unregulated mining, off-road tracks, unsustainable cropland, water misuse
+            and weak land-use planning, are all human made and therefore all solvable.
+            Mongolia has the will, and it has the budget. What it does not have is data
+            on where the land is degrading, how fast and why, so the money and the people
+            are spent blindly while the country keeps losing ground every year.</span>
+          </p>
+        </div>
+
+        <div class="mt-8 border-l border-line pl-6">
+          <p class="font-mono text-[11px] tracking-[0.2em] text-limb mb-4" data-i18n="prob-orbit-label">THE ORBIT</p>
+          <p class="text-[16px] leading-relaxed text-mist">
+            <span data-i18n="prob-orbit-p1-before">Low Earth Orbit is the next economic frontier, but slots and frequencies are
+            claimed on a "first-come, first-served" rule. Today, over</span>
+            <span class="text-chalk" data-i18n="prob-orbit-p1-span">two-thirds</span>
+            <span data-i18n="prob-orbit-p1-after">of satellites belong to a single
+            foreign company, locking nations with limited technology out of space.</span>
+          </p>
+          <p class="mt-5 text-[16px] leading-relaxed text-mist" data-i18n="prob-orbit-p2">
+            Mongolia currently lacks any domestic space market or infrastructure, leaving
+            us completely dependent on foreign suppliers. Without sovereign space and
+            atmospheric technology, we cannot independently track desertification, combat
+            extreme weather, or guarantee our own national data security.
+          </p>
+        </div>
+      </div>
+
+      <figure class="lg:col-span-5 w-full max-w-sm lg:max-w-none lg:ml-auto">
+        <div class="card overflow-hidden">
+          <img src="./assets/introduction.png"
+               alt="Degraded steppe in central Mongolia"
+               width="1600" height="1200" loading="lazy"
+               class="w-full aspect-[4/3] object-cover">
+        </div>
+        <figcaption class="mt-3 font-mono text-[11.5px] text-mist">
+          Fig. 01 · Steppe degradation
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ═══ VISION & MISSION ═══ -->
+  <section id="mission" class="relative py-24 lg:py-32 px-6 lg:px-10 glow glow-teal glow-tr">
+    <div class="mx-auto max-w-[1600px]">
+
+      <h2 class="section-title dec">
+        <span data-i18n="mission-h2-a">Vision &amp;</span> <span class="text-corona" data-i18n="mission-h2-b">mission</span>
+      </h2>
+
+      <div class="mt-14 grid lg:grid-cols-12 gap-y-12 gap-x-16">
+
+        <p class="lg:col-span-3 font-mono text-[11px] tracking-[0.2em] text-corona lg:pt-2" data-i18n="mission-vision-label">VISION</p>
+
+        <div class="lg:col-span-9 max-w-3xl">
+          <p class="font-display font-light text-[clamp(1.2rem,2.1vw,1.6rem)] leading-snug text-chalk" data-i18n="mission-vision-p1">
+            Mongolia aims to establish itself as a stable pillar and global hub for
+            space innovation.
+          </p>
+
+          <ul class="mt-7 space-y-3.5 text-[16px] leading-relaxed text-mist">
+            <li class="flex gap-3.5">
+              <span class="mt-[9px] h-1.5 w-1.5 shrink-0 rotate-45 bg-corona"></span>
+              <span data-i18n="mission-vision-li1">Make satellite technology significantly more accessible.</span>
+            </li>
+            <li class="flex gap-3.5">
+              <span class="mt-[9px] h-1.5 w-1.5 shrink-0 rotate-45 bg-corona"></span>
+              <span data-i18n="mission-vision-li2">Improve environmental protection and climate monitoring.</span>
+            </li>
+          </ul>
+
+          <p class="mt-7 text-[16px] leading-relaxed text-mist" data-i18n="mission-vision-p2">
+            With practical space solutions today, we create the critical infrastructure
+            needed to protect our shared planet, drive sustainable economic growth, and
+            reach further than ever before.
+          </p>
+        </div>
+
+        <div class="lg:col-span-12 h-px bg-line"></div>
+
+        <p class="lg:col-span-3 font-mono text-[11px] tracking-[0.2em] text-limb lg:pt-2" data-i18n="mission-mission-label">MISSION</p>
+
+        <div class="lg:col-span-9 max-w-3xl">
+          <p class="font-display font-light text-[clamp(1.2rem,2.1vw,1.6rem)] leading-snug text-chalk" data-i18n="mission-mission-p1">
+            To build Mongolian launch systems and machine-learning data infrastructure
+            that protect ecosystems, combat desertification, and connect local communities.
+          </p>
+
+          <p class="mt-6 text-[16px] leading-relaxed text-mist" data-i18n="mission-mission-p2">
+            We aim to make space technology fully accessible from the Mongolian steppe
+            through reusable launch infrastructure and build an independent path to orbit.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section id="projects" class="relative py-24 lg:py-32 px-6 lg:px-10 glow glow-lime glow-br">
+    <div class="mx-auto max-w-[1600px]">
+
+      <h2 class="section-title dec">
+        <span data-i18n="projects-h2-a">Our current</span> <span class="text-corona" data-i18n="projects-h2-b">projects</span>
+      </h2>
+
+      <div class="mt-14 border-t border-line">
+
+        <article class="grid lg:grid-cols-12 gap-6 lg:gap-14 py-11 lg:py-14 border-b border-line">
+          <div class="lg:col-span-3">
+            <p class="font-mono text-[11px] tracking-[0.2em] text-corona mb-4" data-i18n="proj1-label">LAUNCH VEHICLES</p>
+            <h3 class="font-display font-light text-[clamp(1.2rem,1.9vw,1.55rem)] leading-snug" data-i18n="proj1-h3">
+              High-Altitude Sounding Rocket Technology
+            </h3>
+          </div>
+          <div class="lg:col-span-9">
+            <p class="text-[16.5px] leading-relaxed text-mist">
+              <span data-i18n="proj1-p-before">Developing Mongolia's first 2-stage high-altitude rocket</span>
+              (<span class="num text-chalk" data-count="10" data-suffix=" km target" data-i18n-suffix="proj1-suffix">0 km target</span>)
+              <span data-i18n="proj1-p-after">to flight-test our custom avionics, multispectral sensors, and high-speed
+              telemetry. The first missions are verifying the rocket's performance and
+              reliability, while validating the ground observation sensors to power the
+              machine-learning environmental models.</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="grid lg:grid-cols-12 gap-6 lg:gap-14 py-11 lg:py-14 border-b border-line">
+          <div class="lg:col-span-3">
+            <p class="font-mono text-[11px] tracking-[0.2em] text-corona mb-4" data-i18n="proj2-label">WEATHER MODIFICATION</p>
+            <h3 class="font-display font-light text-[clamp(1.2rem,1.9vw,1.55rem)] leading-snug" data-i18n="proj2-h3">
+              Domestic Rocket Cloud Seeding Technology
+            </h3>
+          </div>
+          <div class="lg:col-span-9">
+            <ul class="grid md:grid-cols-3 gap-6 lg:gap-10 text-[15.5px] leading-relaxed text-mist">
+              <li>
+                <span class="block text-chalk mb-2" data-i18n="proj2-li1-title">100% Domestic &amp; Reusable</span>
+                <span data-i18n="proj2-li1-text">Mongolia's first cloud seeding rocket, designed for up to 10 reuses with
+                minimal maintenance.</span>
+              </li>
+              <li>
+                <span class="block text-chalk mb-2" data-i18n="proj2-li2-title">Nationwide Infrastructure, 47 Sites</span>
+                <span data-i18n="proj2-li2-text">Scaling across all 21 provinces, partnering with meteorological
+                departments in Ulaanbaatar, Khentii, and Selenge provinces.</span>
+              </li>
+              <li>
+                <span class="block text-chalk mb-2" data-i18n="proj2-li3-title">Targeted Climate Impact</span>
+                <span data-i18n="proj2-li3-text">Replaces costly imported technologies to boost precipitation, directly
+                combating desertification and preserving herder grazing lands.</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="grid lg:grid-cols-12 gap-6 lg:gap-14 py-11 lg:py-14 border-b border-line">
+          <div class="lg:col-span-3">
+            <p class="font-mono text-[11px] tracking-[0.2em] text-limb mb-4" data-i18n="proj3-label">EARTH OBSERVATION</p>
+            <h3 class="font-display font-light text-[clamp(1.2rem,1.9vw,1.55rem)] leading-snug" data-i18n="proj3-h3">
+              Environmental Monitoring Satellite
+            </h3>
+          </div>
+          <div class="lg:col-span-9 grid md:grid-cols-2 gap-6 lg:gap-10">
+            <p class="text-[16.5px] leading-relaxed text-mist">
+              <span data-i18n="proj3-p1-before">We are developing the technologies required for Mongolia's first
+              environmental monitoring satellite. Before launching it into LEO in</span>
+              <span class="text-chalk">Q3 2027</span>,
+              <span data-i18n="proj3-p1-after">in partnership with ONDOspace and
+              the NUM, we are conducting essential technology tests.</span>
+            </p>
+            <p class="text-[16.5px] leading-relaxed text-mist">
+              <span data-i18n="proj3-p2-before">In October of this year, we will launch a high-altitude balloon</span>
+              <span class="text-chalk" data-i18n="proj3-p2-span1">30 to 40 km</span>
+              <span data-i18n="proj3-p2-mid">into the stratosphere, measuring
+              8 critical indices including NDVI and NDWI at</span>
+              <span class="text-chalk" data-i18n="proj3-p2-span2">1.6 m² per pixel</span>.
+              <span data-i18n="proj3-p2-after">At an altitude 15 times
+              lower than standard satellites, this captures data 150 times higher in
+              quality than NASA's MODIS satellite at a significantly lower cost, letting
+              us measure and predict desertification, droughts, and zuds.</span>
+            </p>
+          </div>
+        </article>
+
+        <article class="grid lg:grid-cols-12 gap-6 lg:gap-14 py-11 lg:py-14 border-b border-line">
+          <div class="lg:col-span-3">
+            <p class="font-mono text-[11px] tracking-[0.2em] text-violet mb-4" data-i18n="proj4-label">MACHINE LEARNING</p>
+            <h3 class="font-display font-light text-[clamp(1.2rem,1.9vw,1.55rem)] leading-snug" data-i18n="proj4-h3">
+              AI-Based Environmental Prediction Model
+            </h3>
+          </div>
+          <div class="lg:col-span-9 grid md:grid-cols-2 gap-6 lg:gap-10 items-start">
+            <div>
+              <p class="text-[16.5px] leading-relaxed text-mist">
+                <span data-i18n="proj4-p1-before">A highly accurate AI forecasting model, trained in collaboration with GEE
+                and NAMEM on the most comprehensive dataset in Mongolia:</span>
+                <span class="num text-chalk" data-count="30" data-suffix=" years" data-i18n-suffix="proj4-suffix">0 years</span>
+                <span data-i18n="proj4-p1-after">of historical climate and land degradation data measured every 7 to 10 days.</span>
+              </p>
+              <p class="mt-5 text-[16.5px] leading-relaxed text-mist" data-i18n="proj4-p2">
+                We presented the prototype alongside the Academy of Sciences at an
+                international scientific conference last June. Developed entirely in
+                Mongolia using exclusive local data, it has applications across B2C, B2B,
+                and B2G, protecting everyone from government agencies and mining companies
+                to local herders.
+              </p>
+            </div>
+
+            <dl class="card divide-y divide-line">
+              <div class="px-5 py-5">
+                <dt class="font-mono text-[11px] tracking-[0.18em] text-violet mb-2" data-i18n="proj4-dt1">3 MONTHS</dt>
+                <dd class="text-[15px] text-mist">
+                  <span class="text-chalk" data-i18n="proj4-dd1-span">70 to 80% accuracy</span>
+                  <span data-i18n="proj4-dd1-after">on droughts, zuds,
+                  wildfires, and floods</span>
+                </dd>
+              </div>
+              <div class="px-5 py-5">
+                <dt class="font-mono text-[11px] tracking-[0.18em] text-violet mb-2" data-i18n="proj4-dt2">1 TO 3 YEARS</dt>
+                <dd class="text-[15px] text-mist">
+                  <span class="text-chalk" data-i18n="proj4-dd2-span">75 to 90% accuracy</span>
+                  <span data-i18n="proj4-dd2-after">on desertification
+                  and land degradation</span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" class="relative py-24 lg:py-32 px-6 lg:px-10 glow glow-violet glow-tl">
+    <div class="mx-auto max-w-[1600px]">
+
+      <h2 class="section-title dec">
+        <span data-i18n="about-h2-a">About</span> <span class="text-corona" data-i18n="about-h2-b">us</span>
+      </h2>
+
+      <p class="mt-10 max-w-4xl font-display font-light text-[clamp(1.35rem,2.6vw,2.1rem)] leading-[1.25] text-chalk">
+        <span data-i18n="about-lead-before">A deep-tech startup bringing Mongolian space hardware to global markets at</span>
+        <span class="text-corona" data-i18n="about-lead-span">software speed</span>.
+      </p>
+
+      <div class="mt-16 lg:mt-20">
+        <p class="font-mono text-[11px] tracking-[0.2em] text-violet mb-8" data-i18n="about-advantages-label">OUR KEY ADVANTAGES</p>
+
+        <div class="grid md:grid-cols-3 gap-5 lg:gap-6">
+
+          <article class="card p-7 lg:p-8">
+            <span class="block h-2 w-2 rotate-45 bg-corona mb-6"></span>
+            <h3 class="font-display font-light text-[1.15rem] leading-snug mb-4" data-i18n="about-card1-title">
+              Strong R&amp;D Infrastructure
+            </h3>
+            <p class="text-[15.5px] leading-relaxed text-mist" data-i18n="about-card1-text">
+              Partnered with the Mongolian Academy of Sciences, NUM, and MUST to rapidly
+              prototype and test complex aerospace hardware in top labs.
+            </p>
+          </article>
+
+          <article class="card p-7 lg:p-8">
+            <span class="block h-2 w-2 rotate-45 bg-limb mb-6"></span>
+            <h3 class="font-display font-light text-[1.15rem] leading-snug mb-4" data-i18n="about-card2-title">
+              Exclusive Data Access
+            </h3>
+            <p class="text-[15.5px] leading-relaxed text-mist">
+              <span data-i18n="about-card2-before">By integrating Google Earth Engine with</span>
+              <span class="num text-chalk" data-count="30" data-suffix=" years" data-i18n-suffix="about-card2-suffix">0 years</span>
+              <span data-i18n="about-card2-after">of exclusive national meteorological data, we hold the largest database
+              anyone has in Mongolia, allowing the AI model to be trained on weekly data
+              tracking desertification, droughts, dzud, and temperature anomalies.</span>
+            </p>
+          </article>
+
+          <article class="card p-7 lg:p-8">
+            <span class="block h-2 w-2 rotate-45 bg-violet mb-6"></span>
+            <h3 class="font-display font-light text-[1.15rem] leading-snug mb-4" data-i18n="about-card3-title">
+              Fast and Flexible Engineering
+            </h3>
+            <p class="text-[15.5px] leading-relaxed text-mist" data-i18n="about-card3-text">
+              Native R&amp;D in Mongolia's harsh climate allows rapid engineering
+              iteration at a fraction of global aerospace costs.
+            </p>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ TEAM ═══ -->
+  <section id="team" class="relative py-24 lg:py-32 px-6 lg:px-10 glow glow-teal glow-bl">
+    <div class="mx-auto max-w-[1600px]">
+
+      <h2 class="section-title dec">
+        <span data-i18n="team-h2-a">Our</span> <span class="text-corona" data-i18n="team-h2-b">team</span>
+      </h2>
+
+      <p class="mt-8 max-w-3xl text-[16.5px] leading-relaxed text-mist">
+        <span data-i18n="team-p-before">Our team consists of</span>
+        <span class="num text-chalk" data-count="14" data-suffix=" core members" data-i18n-suffix="team-suffix">0 core members</span>,
+        <span data-i18n="team-p-mid">supported by 4 technical and 3 business advisors. Highlighted below are the</span>
+        <span class="text-chalk" data-i18n="team-p-span">8 key members</span>
+        <span data-i18n="team-p-after">who actively lead and execute our
+        primary space projects.</span>
+      </p>
+
+      <div class="mt-14 lg:mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10 lg:gap-y-12">
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/bat-ireedui.jpg" alt="B.Bat-Ireedui"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">B.Bat-Ireedui</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-corona" data-i18n="team-role-ceo">FOUNDER &amp; CEO</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/temuulen.jpg" alt="T.Temuulen"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">T.Temuulen</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-corona" data-i18n="team-role-cto">FOUNDER &amp; CTO</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/dulguun.jpg" alt="B.Dulguun"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">B.Dulguun</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-corona" data-i18n="team-role-eng">CHIEF ENGINEER</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/khuslen.png" alt="B.Khuslen"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">B.Khuslen</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-corona" data-i18n="team-role-coo">COO</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/chinbayar.jpg" alt="Ts.Chinbayar"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">Ts.Chinbayar</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-limb" data-i18n="team-role-embed">EMBEDDED SYSTEMS ENGINEER</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/odjargal.jpg" alt="G.Odjargal"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">G.Odjargal</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-limb" data-i18n="team-role-aero">AEROSPACE ENGINEER</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/jawkhlan.jpg" alt="Ts.Jawkhlan"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">Ts.Jawkhlan</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-limb" data-i18n="team-role-payload">PAYLOAD INTEGRATION LEAD</p>
+          </figcaption>
+        </figure>
+
+        <figure>
+          <div class="card overflow-hidden">
+            <img src="./assets/team/munkh-orgil.jpg" alt="M.Munkh-Orgil"
+                 width="600" height="800" loading="lazy"
+                 class="w-full aspect-[3/4] object-cover">
+          </div>
+          <figcaption class="mt-4">
+            <p class="font-display font-light text-[1.05rem] leading-snug">M.Munkh-Orgil</p>
+            <p class="mt-1.5 font-mono text-[11px] tracking-[0.12em] text-violet" data-i18n="team-role-research">ENGINEER, RESEARCH SCIENTIST</p>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="relative py-24 lg:py-32 px-6 lg:px-10 overflow-hidden isolate">
+
+    <div class="pointer-events-none absolute inset-0 -z-10">
+      <div class="contact-glow"></div>
+    </div>
+
+    <div class="mx-auto max-w-[1600px]">
+      <div class="rounded-3xl border border-line bg-panel/30 backdrop-blur-sm p-8 sm:p-12 lg:p-16">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+
+          <div class="lg:col-span-5">
+            <h2 class="section-title dec">
+              <span data-i18n="contact-h2-a">Get in</span> <span class="text-corona" data-i18n="contact-h2-b">touch</span>
+            </h2>
+
+            <p class="mt-7 max-w-md text-[16.5px] leading-relaxed text-mist" data-i18n="contact-lead">
+              Partners, researchers, engineers and sponsors: we are building Mongolia's
+              first path to orbit, and we are looking for people to build it with.
+            </p>
+
+            <p class="mt-10 font-mono text-[10.5px] tracking-[0.2em] text-limb mb-4" data-i18n="contact-social-label">SOCIAL</p>
+            <ul class="flex flex-wrap gap-2.5">
+              <li>
+                <a href="https://www.instagram.com/the_icarus_space/" target="_blank" rel="noopener"
+                   class="group inline-flex items-center gap-2 rounded-full border border-line bg-void/40 pl-5 pr-4 py-2.5 text-[14px] hover:border-corona/40 transition">
+                  Instagram
+                  <span class="font-mono text-[12px] text-mist group-hover:text-corona transition">&#8599;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-4 lg:border-l lg:border-line lg:pl-14">
+            <ul class="space-y-8">
+              <li>
+                <p class="font-mono text-[10.5px] tracking-[0.2em] text-mist mb-2.5" data-i18n="contact-phone-label">PHONE</p>
+                <a href="tel:+97699861105"
+                   class="font-display font-light text-[clamp(1.1rem,1.6vw,1.35rem)] hover:text-corona transition">
+                  +976 9986 1105
+                </a>
+              </li>
+              <li>
+                <p class="font-mono text-[10.5px] tracking-[0.2em] text-mist mb-2.5" data-i18n="contact-email-label">EMAIL</p>
+                <a href="mailto:theicarusspace@gmail.com"
+                   class="font-display font-light text-[clamp(1.1rem,1.6vw,1.35rem)] hover:text-corona transition break-all">
+                  theicarusspace@gmail.com
+                </a>
+              </li>
+              <li>
+                <p class="font-mono text-[10.5px] tracking-[0.2em] text-mist mb-2.5" data-i18n="contact-location-label">LOCATION</p>
+                <p class="font-display font-light text-[clamp(1.1rem,1.6vw,1.35rem)] text-mist" data-i18n="contact-location-value">
+                  Ulaanbaatar, Mongolia
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <figure class="lg:col-span-3 w-full max-w-[260px] lg:max-w-none">
+            <div class="rounded-2xl bg-white p-4">
+              <img src="./assets/qr.png"
+                   alt="QR code with Icarus Space contact details"
+                   width="512" height="512" loading="lazy"
+                   class="w-full aspect-square object-contain">
+            </div>
+            <figcaption class="mt-4 font-mono text-[11px] leading-relaxed text-mist" data-i18n="contact-qr-caption">
+              Scan to save our contact card
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="relative border-t border-line/60 py-10 px-6 lg:px-10">
+    <div class="mx-auto max-w-[1600px] flex flex-col sm:flex-row justify-between gap-4 font-mono text-[11.5px] text-mist">
+      <span>© 2026 Icarus Space · <span data-i18n="footer-location">Ulaanbaatar, Mongolia</span> · <span data-i18n="footer-designed">Designed by</span> Dr0nd0</span>
+      <span data-i18n="footer-tagline">Landlocked on Earth. Open to the sky.</span>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+
+  /* ── Сүлжээний canvas ── */
+  const cv = document.getElementById('fxNet');
+  if(cv && !reduce){
+    const ctx = cv.getContext('2d');
+    let w = 0, h = 0, pts = [];
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const mouse = {x:-9999, y:-9999};
+
+    function build(){
+      w = cv.clientWidth; h = cv.clientHeight;
+      cv.width = w * dpr; cv.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = w < 768 ? 42 : 88;
+      pts = Array.from({length:n}, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        z: Math.random() * 0.75 + 0.25,
+        vx: (Math.random() - .5) * 0.18,
+        vy: (Math.random() - .5) * 0.18,
+        tw: Math.random() * Math.PI * 2
+      }));
+    }
+
+    function frame(){
+      ctx.clearRect(0, 0, w, h);
+      for(const p of pts){
+        p.x += p.vx * p.z; p.y += p.vy * p.z; p.tw += 0.012;
+        if(p.x < -20) p.x = w + 20; if(p.x > w + 20) p.x = -20;
+        if(p.y < -20) p.y = h + 20; if(p.y > h + 20) p.y = -20;
+
+        const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx*dx + dy*dy;
+        if(d2 < 16000 && d2 > 1){
+          const f = (1 - d2/16000) * 0.9 / Math.sqrt(d2);
+          p.x += dx * f * 6; p.y += dy * f * 6;
+        }
+
+        const a = (0.14 + 0.42 * p.z) * (0.6 + 0.4 * Math.sin(p.tw));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.z * 1.5, 0, 6.2832);
+        ctx.fillStyle = 'rgba(232,245,236,' + a.toFixed(3) + ')';
+        ctx.fill();
+      }
+      for(let i = 0; i < pts.length; i++){
+        for(let j = i + 1; j < pts.length; j++){
+          const a = pts[i], b = pts[j];
+          const dx = a.x - b.x, dy = a.y - b.y, d2 = dx*dx + dy*dy;
+          if(d2 > 20000) continue;
+          const o = (1 - d2/20000) * 0.14 * Math.min(a.z, b.z);
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = 'rgba(163,230,53,' + o.toFixed(3) + ')';
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, {passive:true});
+    addEventListener('resize', build, {passive:true});
+    build(); frame();
+  }
+
+  /* ── Гүйлгэлт: хэмжүүр, параллакс, хиртэлт, тэнхлэг ── */
+  const bar  = document.getElementById('progress');
+  const grid = document.getElementById('fxGrid');
+  const dots = [...document.querySelectorAll('.rail a')];
+  const secs = dots.map(a => document.querySelector(a.getAttribute('href')));
+  let queued = false;
+
+  function onScroll(){
+    if(queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      const max = root.scrollHeight - innerHeight;
+      const y = scrollY;
+      if(bar) bar.style.width = ((max > 0 ? y / max : 0) * 100) + '%';
+      if(!reduce){
+        root.style.setProperty('--sc', Math.min(y / innerHeight, 1.6).toFixed(4));
+        if(grid) grid.style.backgroundPosition = '0 ' + (-y * 0.14).toFixed(1) + 'px';
+      }
+      let act = -1;
+      secs.forEach((s, i) => {
+        if(s && s.getBoundingClientRect().top <= innerHeight * 0.42) act = i;
+      });
+      dots.forEach((d, i) => d.classList.toggle('on', i === act));
+      queued = false;
+    });
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ── Илрэлт ── */
+  const items = [...document.querySelectorAll(
+    '.section-title, section[id] article, section[id] figure, .marquee, section[id] ul > li'
+  )];
+  items.forEach(el => el.classList.add('rv'));
+  document.querySelectorAll('figure > .card, figure > div').forEach(el => el.classList.add('rvimg'));
+
+  const io = new IntersectionObserver(en => {
+    en.forEach(e => {
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const sibs = [...(el.parentElement?.children || [])].filter(c => c.classList.contains('rv'));
+      el.style.transitionDelay = Math.min(Math.max(sibs.indexOf(el), 0), 6) * 0.08 + 's';
+      el.classList.add('in');
+      el.querySelectorAll('.rvimg').forEach(i => i.classList.add('in'));
+      io.unobserve(el);
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -8% 0px'});
+  items.forEach(el => io.observe(el));
+
+  /* ── Гарчгийн тайлалт (анх удаа дэлгэцэнд орж ирэхэд) ── */
+  const CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+/<>';
+  const dio = new IntersectionObserver(en => {
+    en.forEach(e => {
+      if(!e.isIntersecting) return;
+      const el = e.target; dio.unobserve(el);
+      if(reduce) return;
+      const nodes = [];
+      (function walk(n){
+        n.childNodes.forEach(c => {
+          if(c.nodeType === 3 && c.textContent.trim()) nodes.push({n:c, t:c.textContent});
+          else if(c.nodeType === 1) walk(c);
+        });
+      })(el);
+      const total = nodes.reduce((s, o) => s + o.t.length, 0);
+      if(!total) return;
+      const t0 = performance.now(), dur = 900;
+      (function step(now){
+        const prog = Math.min((now - t0) / dur, 1);
+        const shown = Math.floor(total * (1 - Math.pow(1 - prog, 2)));
+        let seen = 0;
+        for(const o of nodes){
+          let out = '';
+          for(let i = 0; i < o.t.length; i++){
+            const g = seen + i, c = o.t[i];
+            out += (g < shown || c === ' ' || c === '\n') ? c : CH[(Math.random() * CH.length) | 0];
+          }
+          o.n.textContent = out;
+          seen += o.t.length;
+        }
+        if(prog < 1) requestAnimationFrame(step);
+        else nodes.forEach(o => { o.n.textContent = o.t; });
+      })(t0);
+    });
+  }, {threshold:0.55});
+  document.querySelectorAll('.dec').forEach(el => dio.observe(el));
+
+  /* ── Тоо тоолох ── */
+  const nio = new IntersectionObserver(en => {
+    en.forEach(e => {
+      if(!e.isIntersecting) return;
+      const el = e.target; nio.unobserve(el);
+      const target = parseFloat(el.dataset.count);
+      const sfx = el.dataset.suffix || '';
+      if(reduce){ el.textContent = target + sfx; el.dataset.counted = '1'; return; }
+      const t0 = performance.now(), dur = 1500;
+      (function step(now){
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + (el.dataset.suffix || '');
+        if(p < 1) requestAnimationFrame(step);
+        else { el.dataset.counted = '1'; }
+      })(t0);
+    });
+  }, {threshold:0.6});
+  document.querySelectorAll('[data-count]').forEach(el => nio.observe(el));
+
+  /* ── Карт: 3D хазайлт ба гэрлийн төвлөрөл ── */
+  if(!reduce){
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        const mx = e.clientX - r.left, my = e.clientY - r.top;
+        card.style.setProperty('--mx', mx + 'px');
+        card.style.setProperty('--my', my + 'px');
+        const rx = ((my / r.height) - .5) * -7;
+        const ry = ((mx / r.width)  - .5) *  7;
+        card.style.transform =
+          'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-3px)';
+      }, {passive:true});
+      card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  /* ── Курсор ── */
+  const cur = document.getElementById('cur'), dot = document.getElementById('curDot');
+  if(cur && dot && !reduce && matchMedia('(hover:hover)').matches){
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+    addEventListener('pointermove', e => {
+      tx = e.clientX; ty = e.clientY;
+      dot.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0)';
+      cur.classList.toggle('hot', !!e.target.closest('a, button, .card'));
+    }, {passive:true});
+    (function loop(){
+      cx += (tx - cx) * 0.16; cy += (ty - cy) * 0.16;
+      cur.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+ /* ══════════════════════════════════════════════
+     ХЭЛ СОЛИХ: ОРЧУУЛГЫН САН БА ШИЛЖИЛТИЙН ЭФФЕКТ
+     ══════════════════════════════════════════════ */
+  const I18N = {
+    "nav-mission":  { en:"Vision & mission", mn:"Алсын хараа ба эрхэм зорилго" },
+    "nav-projects": { en:"Our projects",     mn:"Манай төслүүд" },
+    "nav-about":    { en:"About us",         mn:"Бидний тухай" },
+    "nav-team":     { en:"Team",             mn:"Баг" },
+    "nav-contact":  { en:"Contact us",       mn:"Холбогдох" },
+
+    "rail-problems": { en:"PROBLEMS", mn:"АСУУДАЛ" },
+    "rail-mission":  { en:"MISSION",  mn:"ЭРХЭМ ЗОРИЛГО" },
+    "rail-projects": { en:"PROJECTS", mn:"ТӨСЛҮҮД" },
+    "rail-about":    { en:"ABOUT",    mn:"ТУХАЙ" },
+    "rail-team":     { en:"TEAM",     mn:"БАГ" },
+    "rail-contact":  { en:"CONTACT",  mn:"ХОЛБОО БАРИХ" },
+
+    "hero-tagline": { en:"open to the sky", mn:"тэнгэрт нээлттэй" },
+    "hero-desc": {
+      en:"Icarus Space is a Mongolian based space technology startup dedicated to developing AI powered Earth observation, environmental monitoring, and climate resilience solutions. By combining proprietary machine learning models and next generation LEO remote sensing with a reusable, low cost space transport system, we are creating Mongolia's most resilient end-to-end space platform infrastructure, trained on Mongolia's extreme environment.",
+      mn:"Icarus Space бол хиймэл оюун ухаанд суурилсан Дэлхийг тандан судлах, байгаль орчны мониторинг болон уур амьсгалын тэсвэртэй байдлын шийдлүүдийг хөгжүүлж буй Монголын сансрын технологийн стартап юм. Бид өөрсдийн боловсруулсан машин сургалтын загварууд болон дараагийн үеийн LEO (дэлхийн доод тойрог замын) зайнаас тандан таних технологийг, дахин ашиглагдах хямд өртөгтэй сансрын тээврийн системтэй хослуулан, Монголын хатуу ширүүн орчинд сургагдсан иж бүрэн, хамгийн тэсвэртэй сансрын платформын дэд бүтцийг бүтээж байна."
+    },
+
+    "mq-1c": { en:"8 CRITICAL INDICES", mn:"8 ЧУХАЛ ҮЗҮҮЛЭЛТ" },
+    "mq-2b": { en:"PER PIXEL", mn:"ПИКСЕЛЬ ТУТАМД" },
+    "mq-3a": { en:"STRATOSPHERIC BALLOON", mn:"СТРАТОСФЕРИЙН БӨМБӨЛӨГ" },
+    "mq-3b": { en:"30 TO 40 KM", mn:"30-40 КМ" },
+    "mq-4":  { en:"REUSABLE LAUNCH INFRASTRUCTURE", mn:"ДАХИН АШИГЛАГДАХ ХӨӨРГӨХ ДЭД БҮТЭЦ" },
+    "mq-5a": { en:"30 YEARS", mn:"30 ЖИЛИЙН" },
+    "mq-5b": { en:"OF NATIONAL CLIMATE DATA", mn:"ҮНДЭСНИЙ УУР АМЬСГАЛЫН ӨГӨГДӨЛ" },
+    "mq-6":  { en:"REMOTE SENSING", mn:"ЗАЙНААС ТАНДАН ТАНИХ" },
+    "mq-7a": { en:"CLOUD SEEDING", mn:"ҮҮЛ ТАРИАЛАЛТ" },
+    "mq-7b": { en:"47 SITES", mn:"47 ЦЭГ" },
+    "mq-8a": { en:"ULAANBAATAR", mn:"УЛААНБААТАР" },
+    "mq-8b": { en:"MONGOLIA", mn:"МОНГОЛ" },
+
+    "prob-h2-a": { en:"Problems in", mn:"Монголд тулгарч буй" },
+    "prob-h2-b": { en:"Mongolia", mn:"асуудлууд" },
+    "prob-land-label": { en:"THE LAND", mn:"ГАЗАР НУТАГ" },
+    "prob-land-before": { en:"Around", mn:"Монголын нутаг дэвсгэрийн ойролцоогоор" },
+    "prob-land-after": {
+      en:"of Mongolia's land is already degraded, and the eight forces driving it, overgrazing, deforestation, steppe fires, unregulated mining, off-road tracks, unsustainable cropland, water misuse and weak land-use planning, are all human made and therefore all solvable. Mongolia has the will, and it has the budget. What it does not have is data on where the land is degrading, how fast and why, so the money and the people are spent blindly while the country keeps losing ground every year.",
+      mn:"нь аль хэдийн доройтсон бөгөөд үүнийг нөхцөлдүүлж буй найман хүчин зүйл буюу бэлчээрийн талхагдал, ойн хомсдол, хээрийн түймэр, замбараагүй уул уурхай, замгүй газар зорчих, тогтвортой бус газар тариалан, усыг зохисгүй ашиглах болон газар зохион байгуулалтын сул төлөвлөлт зэрэг нь бүгд хүний үйл ажиллагаанаас үүдэлтэй тул шийдвэрлэх боломжтой. Монгол Улсад хүсэл эрмэлзэл, төсөв байгаа ч газар хаана, ямар хурдтай, яагаад доройтож байгаад шаардлагатай өгөгдөл дутмаг тул мөнгө болон хүн хүчийг үр ашиггүй зарцуулж, улс орон жил бүр газраа алдсаар байна."
+    },
+    "prob-orbit-label": { en:"THE ORBIT", mn:"ОРБИТ" },
+    "prob-orbit-p1-before": {
+      en:"Low Earth Orbit is the next economic frontier, but slots and frequencies are claimed on a \"first-come, first-served\" rule. Today, over",
+      mn:"Дэлхийн доод тойрог замын (LEO) орон зай бол эдийн засгийн дараагийн шинэ хил хязгаар боловч слот болон давтамжийг \"түрүүлж ирсэнд нь\" зарчмаар эзэмшүүлдэг. Өнөөдөр"
+    },
+    "prob-orbit-p1-span": { en:"two-thirds", mn:"гуравны хоёроос илүү хувийг" },
+    "prob-orbit-p1-after": {
+      en:"of satellites belong to a single foreign company, locking nations with limited technology out of space.",
+      mn:"хиймэл дагуулуудыг ганцхан гадаадын компани эзэмшиж байгаа нь технологийн чадамж багатай улс орнуудыг сансрын орон зайнаас шахан гаргаж байна."
+    },
+    "prob-orbit-p2": {
+      en:"Mongolia currently lacks any domestic space market or infrastructure, leaving us completely dependent on foreign suppliers. Without sovereign space and atmospheric technology, we cannot independently track desertification, combat extreme weather, or guarantee our own national data security.",
+      mn:"Монгол Улсад одоогоор дотоодын сансрын зах зээл болон дэд бүтэц байхгүй тул бид гадаадын нийлүүлэгчдээс бүрэн хараат байна. Бие даасан сансар болон агаар мандлын технологигүйгээр бид цөлжилтийг хянах, цаг агаарын аюулт үзэгдэлтэй тэмцэх, эсвэл үндэсний өгөгдлийн аюулгүй байдлаа бие даан баталгаажуулах боломжгүй."
+    },
+
+    "mission-h2-a": { en:"Vision &", mn:"Алсын хараа ба" },
+    "mission-h2-b": { en:"mission", mn:"эрхэм зорилго" },
+    "mission-vision-label": { en:"VISION", mn:"АЛСЫН ХАРАА" },
+    "mission-vision-p1": { en:"Mongolia aims to establish itself as a stable pillar and global hub for space innovation.", mn:"Монгол Улс сансрын инновацын тогтвортой тулгуур, дэлхийн төв болохыг зорьж байна." },
+    "mission-vision-li1": { en:"Make satellite technology significantly more accessible.", mn:"Хиймэл дагуулын технологийг илүү хүртээмжтэй болгох." },
+    "mission-vision-li2": { en:"Improve environmental protection and climate monitoring.", mn:"Байгаль орчны хамгаалал болон уур амьсгалын хяналтыг сайжруулах." },
+    "mission-vision-p2": { en:"With practical space solutions today, we create the critical infrastructure needed to protect our shared planet, drive sustainable economic growth, and reach further than ever before.", mn:"Өнөөдрийн практик сансрын шийдлүүдээр бид эх дэлхийгээ хамгаалах, тогтвортой эдийн засгийн өсөлтийг дэмжих, өмнө нь хүрч байгаагүй өндөр түвшинд хүрэхэд шаардлагатай чухал дэд бүтцийг бүтээж байна." },
+    "mission-mission-label": { en:"MISSION", mn:"ЭРХЭМ ЗОРИЛГО" },
+    "mission-mission-p1": { en:"To build Mongolian launch systems and machine-learning data infrastructure that protect ecosystems, combat desertification, and connect local communities.", mn:"Экосистемийг хамгаалах, цөлжилттэй тэмцэх, орон нутгийн иргэдийг холбох Монголын хөөргөх систем болон машин сургалтын өгөгдлийн дэд бүтцийг бүтээх." },
+    "mission-mission-p2": { en:"We aim to make space technology fully accessible from the Mongolian steppe through reusable launch infrastructure and build an independent path to orbit.", mn:"Бид дахин ашиглагдах хөөргөх дэд бүтцээр дамжуулан Монголын хээр талаас сансрын технологийг бүрэн хүртээмжтэй болгож, орбит руу хүрэх бие даасан замыг засахыг зорьж байна." },
+
+    "projects-h2-a": { en:"Our current", mn:"Манай одоогийн" },
+    "projects-h2-b": { en:"projects", mn:"төслүүд" },
+
+    "proj1-label": { en:"LAUNCH VEHICLES", mn:"ХӨӨРГӨХ ХЭРЭГСЭЛ" },
+    "proj1-h3": { en:"High-Altitude Sounding Rocket Technology", mn:"Өндөр өргөгдлийн судалгааны пуужингийн технологи" },
+    "proj1-p-before": { en:"Developing Mongolia's first 2-stage high-altitude rocket", mn:"Монголын анхны 2 шатлалт өндөр өргөгдлийн пуужинг хөгжүүлж байгаа бөгөөд" },
+    "proj1-suffix": { en:" km target", mn:" км-ийн зорилт" },
+    "proj1-p-after": {
+      en:"to flight-test our custom avionics, multispectral sensors, and high-speed telemetry. The first missions are verifying the rocket's performance and reliability, while validating the ground observation sensors to power the machine-learning environmental models.",
+      mn:"манай тусгай авионик, олон спектрт мэдрэгч болон өндөр хурдны телеметрийг туршин нисгэх юм. Анхны нислэгүүдээр пуужингийн үзүүлэлт, найдвартай ажиллагааг шалгахаас гадна машин сургалтын байгаль орчны загварыг мэдээллээр хангах газрын ажиглалтын мэдрэгчүүдийг туршин баталгаажуулна."
+    },
+
+    "proj2-label": { en:"WEATHER MODIFICATION", mn:"ЦАГ УУРАНД НӨЛӨӨЛӨХ" },
+    "proj2-h3": { en:"Domestic Rocket Cloud Seeding Technology", mn:"Үүл тариалах дотоодын пуужингийн технологи" },
+    "proj2-li1-title": { en:"100% Domestic & Reusable", mn:"100% дотоодын, дахин ашиглагдах" },
+    "proj2-li1-text": { en:"Mongolia's first cloud seeding rocket, designed for up to 10 reuses with minimal maintenance.", mn:"Хамгийн бага засвар үйлчилгээгээр 10 хүртэл удаа дахин ашиглагдах боломжтой Монголын анхны үүл тариалах пуужин." },
+    "proj2-li2-title": { en:"Nationwide Infrastructure, 47 Sites", mn:"Улс орон даяарх дэд бүтэц, 47 цэг" },
+    "proj2-li2-text": { en:"Scaling across all 21 provinces, partnering with meteorological departments in Ulaanbaatar, Khentii, and Selenge provinces.", mn:"21 аймаг даяар өргөжиж, Улаанбаатар хот болон Хэнтий, Сэлэнгэ аймгуудын цаг уурын байгууллагуудтай хамтран ажиллаж байна." },
+    "proj2-li3-title": { en:"Targeted Climate Impact", mn:"Зорилтот уур амьсгалын нөлөө" },
+    "proj2-li3-text": { en:"Replaces costly imported technologies to boost precipitation, directly combating desertification and preserving herder grazing lands.", mn:"Хуртай агаарыг дэмжиж, тунадас нэмэгдүүлэх өндөр зардлаар импортолдог технологийг орлон, цөлжилттэй шууд тэмцэж, малчдын бэлчээрийг хамгаална." },
+
+    "proj3-label": { en:"EARTH OBSERVATION", mn:"ДЭЛХИЙГ ТАНДАН СУДЛАХ" },
+    "proj3-h3": { en:"Environmental Monitoring Satellite", mn:"Байгаль орчны мониторингийн хиймэл дагуул" },
+    "proj3-p1-before": { en:"We are developing the technologies required for Mongolia's first environmental monitoring satellite. Before launching it into LEO in", mn:"Бид Монголын анхны байгаль орчны хяналтын хиймэл дагуулд шаардлагатай технологиудыг хөгжүүлж байна. Үүнийг LEO тойрог замд" },
+    "proj3-p1-after": { en:"in partnership with ONDOspace and the NUM, we are conducting essential technology tests.", mn:"онд ONDOspace болон МУИС-тай хамтран хөөргөхөөс өмнө шаардлагатай технологийн туршилтуудыг хийж байна." },
+    "proj3-p2-before": { en:"In October of this year, we will launch a high-altitude balloon", mn:"Энэ оны 10-р сард бид" },
+    "proj3-p2-span1": { en:"30 to 40 km", mn:"30-40 км" },
+    "proj3-p2-mid": { en:"into the stratosphere, measuring 8 critical indices including NDVI and NDWI at", mn:"өндөрт стратосферт бөмбөлөг хөөргөж, NDVI, NDWI зэрэг 8 чухал үзүүлэлтийг" },
+    "proj3-p2-span2": { en:"1.6 m² per pixel", mn:"1.6 м² пиксель тутамд" },
+    "proj3-p2-after": {
+      en:"At an altitude 15 times lower than standard satellites, this captures data 150 times higher in quality than NASA's MODIS satellite at a significantly lower cost, letting us measure and predict desertification, droughts, and zuds.",
+      mn:"нарийвчлалтайгаар хэмжинэ. Энгийн хиймэл дагуулаас 15 дахин доогуур өндөрт байрлах тул NASA-ийн MODIS хиймэл дагуулаас 150 дахин өндөр чанартай өгөгдлийг бага зардлаар авч, цөлжилт, ган, зудыг хэмжих болон таамаглах боломжтой."
+    },
+
+    "proj4-label": { en:"MACHINE LEARNING", mn:"МАШИН СУРГАЛТ" },
+    "proj4-h3": { en:"AI-Based Environmental Prediction Model", mn:"Хиймэл оюунд суурилсан байгаль орчны урьдчилсан таамаглалын загвар" },
+    "proj4-p1-before": { en:"A highly accurate AI forecasting model, trained in collaboration with GEE and NAMEM on the most comprehensive dataset in Mongolia:", mn:"GEE болон УЦУОШГ-тай хамтран Монголын хамгийн иж бүрэн өгөгдлийн сан дээр сургасан маш өндөр нарийвчлалтай хиймэл оюуны таамаглалын загвар:" },
+    "proj4-suffix": { en:" years", mn:" жилийн" },
+    "proj4-p1-after": { en:"of historical climate and land degradation data measured every 7 to 10 days.", mn:"түүхэн уур амьсгал болон газрын доройтлын 7-10 хоног тутмын хэмжилтийн өгөгдөл." },
+    "proj4-p2": {
+      en:"We presented the prototype alongside the Academy of Sciences at an international scientific conference last June. Developed entirely in Mongolia using exclusive local data, it has applications across B2C, B2B, and B2G, protecting everyone from government agencies and mining companies to local herders.",
+      mn:"Бид энэхүү загварын туршилтын хувилбарыг (прототип) өнгөрсөн 6-р сард Шинжлэх Ухааны Академитай хамтран олон улсын эрдэм шинжилгээний хуралд танилцуулсан. Бүхэлдээ Монголд, зөвхөн дотоодын онцгой өгөгдлийг ашиглан хөгжүүлсэн энэхүү загвар нь B2C, B2B, B2G чиглэлээр ашиглагдах бөгөөд төрийн байгууллага, уул уурхайн компаниудаас эхлээд малчид хүртэлх бүх шатанд хэрэглэгдэх боломжтой."
+    },
+    "proj4-dt1": { en:"3 MONTHS", mn:"3 САР" },
+    "proj4-dd1-span": { en:"70 to 80% accuracy", mn:"70-80%-ийн нарийвчлал" },
+    "proj4-dd1-after": { en:"on droughts, zuds, wildfires, and floods", mn:"ган, зуд, хээрийн түймэр болон үерт" },
+    "proj4-dt2": { en:"1 TO 3 YEARS", mn:"1-3 ЖИЛ" },
+    "proj4-dd2-span": { en:"75 to 90% accuracy", mn:"75-90%-ийн нарийвчлал" },
+    "proj4-dd2-after": { en:"on desertification and land degradation", mn:"цөлжилт болон газрын доройтолд" },
+
+    "about-h2-a": { en:"About", mn:"Бидний" },
+    "about-h2-b": { en:"us", mn:"тухай" },
+    "about-lead-before": { en:"A deep-tech startup bringing Mongolian space hardware to global markets at", mn:"Монголын сансрын техник хангамжийг дэлхийн зах зээлд" },
+    "about-lead-span": { en:"software speed", mn:"программ хангамжийн хурдаар" },
+    "about-advantages-label": { en:"OUR KEY ADVANTAGES", mn:"БИДНИЙ ГОЛ ДАВУУ ТАЛУУД" },
+    "about-card1-title": { en:"Strong R&D Infrastructure", mn:"Хүчирхэг R&D дэд бүтэц" },
+    "about-card1-text": { en:"Partnered with the Mongolian Academy of Sciences, NUM, and MUST to rapidly prototype and test complex aerospace hardware in top labs.", mn:"Шинжлэх Ухааны Академи, МУИС, ШУТИС-тай хамтран нарийн төвөгтэй агаар сансрын техник хангамжийг шилдэг лабораторидод хурдан туршин прототипжуулдаг." },
+    "about-card2-title": { en:"Exclusive Data Access", mn:"Онцгой өгөгдлийн хандалт" },
+    "about-card2-before": { en:"By integrating Google Earth Engine with", mn:"Google Earth Engine-ийг" },
+    "about-card2-suffix": { en:" years", mn:" жилийн" },
+    "about-card2-after": {
+      en:"of exclusive national meteorological data, we hold the largest database anyone has in Mongolia, allowing the AI model to be trained on weekly data tracking desertification, droughts, dzud, and temperature anomalies.",
+      mn:"үндэсний цаг уурын онцгой өгөгдөлтэй нэгтгэснээр бид Монгол дахь хамгийн том өгөгдлийн санг эзэмшиж, цөлжилт, ган, зуд, температурын аномалийг мөшгих долоо хоног тутмын өгөгдлөөр хиймэл оюуны загвараа сургаж байна."
+    },
+    "about-card3-title": { en:"Fast and Flexible Engineering", mn:"Хурдан бөгөөд уян хатан инженерчлэл" },
+    "about-card3-text": { en:"Native R&D in Mongolia's harsh climate allows rapid engineering iteration at a fraction of global aerospace costs.", mn:"Монголын хатуу ширүүн уур амьсгалд дотооддоо хийгдэж буй R&D нь дэлхийн агаар сансрын салбарын зардлаас хэд дахин бага зардлаар инженерийн хурдан туршилт, хөгжүүлэлтийг хийх боломжийг олгодог." },
+
+    "team-h2-a": { en:"Our", mn:"Манай" },
+    "team-h2-b": { en:"team", mn:"баг" },
+    "team-p-before": { en:"Our team consists of", mn:"Манай баг" },
+    "team-suffix": { en:" core members", mn:" үндсэн гишүүнээс" },
+    "team-p-mid": { en:"supported by 4 technical and 3 business advisors. Highlighted below are the", mn:"бүрдэж, техникийн 4, бизнесийн 3 зөвлөхөөр дэмжигддэг. Доор онцолсон" },
+    "team-p-span": { en:"8 key members", mn:"8 гол гишүүн" },
+    "team-p-after": { en:"who actively lead and execute our primary space projects.", mn:"нь манай үндсэн сансрын төслүүдийг идэвхтэй удирдаж, хэрэгжүүлдэг." },
+
+    "team-role-ceo":      { en:"FOUNDER & CEO", mn:"ҮҮСГЭН БАЙГУУЛАГЧ & ЕРӨНХИЙ ЗАХИРАЛ" },
+    "team-role-cto":      { en:"FOUNDER & CTO", mn:"ҮҮСГЭН БАЙГУУЛАГЧ & ТЕХНИКИЙН ЗАХИРАЛ" },
+    "team-role-eng":      { en:"CHIEF ENGINEER", mn:"ЕРӨНХИЙ ИНЖЕНЕР" },
+    "team-role-coo":      { en:"COO", mn:"ҮЙЛ АЖИЛЛАГАА ХАРИУЦСАН ЗАХИРАЛ" },
+    "team-role-embed":    { en:"EMBEDDED SYSTEMS ENGINEER", mn:"ЭМБЕДДЭД СИСТЕМИЙН ИНЖЕНЕР" },
+    "team-role-aero":     { en:"AEROSPACE ENGINEER", mn:"АГААР САНСРЫН ИНЖЕНЕР" },
+    "team-role-payload":  { en:"PAYLOAD INTEGRATION LEAD", mn:"ПЭЙЛОАД НЭГТГЭЛИЙН УДИРДАГЧ" },
+    "team-role-research": { en:"ENGINEER, RESEARCH SCIENTIST", mn:"ИНЖЕНЕР, СУДАЛГААНЫ ЭРДЭМТЭН" },
+
+    "contact-h2-a": { en:"Get in", mn:"Бидэнтэй" },
+    "contact-h2-b": { en:"touch", mn:"холбогдох" },
+    "contact-lead": { en:"Partners, researchers, engineers and sponsors: we are building Mongolia's first path to orbit, and we are looking for people to build it with.", mn:"Хамтран ажиллагсад, судлаачид, инженерүүд болон ивээн тэтгэгчид ээ: бид Монголын орбит руу хүрэх анхны замыг бүтээж байгаа бөгөөд хамтран бүтээлцэх хүмүүсийг урьж байна." },
+    "contact-social-label": { en:"SOCIAL", mn:"НИЙГМИЙН СҮЛЖЭЭ" },
+    "contact-phone-label": { en:"PHONE", mn:"УТАС" },
+    "contact-email-label": { en:"EMAIL", mn:"И-МЭЙЛ" },
+    "contact-location-label": { en:"LOCATION", mn:"БАЙРШИЛ" },
+    "contact-location-value": { en:"Ulaanbaatar, Mongolia", mn:"Улаанбаатар, Монгол" },
+    "contact-qr-caption": { en:"Scan to save our contact card", mn:"Холбоо барих мэдээллийг хадгалахын тулд сканнердаарай" },
+
+    "footer-location": { en:"Ulaanbaatar, Mongolia", mn:"Улаанбаатар, Монгол" },
+    "footer-designed": { en:"Designed by", mn:"Дизайн:" },
+    "footer-tagline": { en:"Landlocked on Earth. Open to the sky.", mn:"Дэлхийд далайд гартаагүй ч, тэнгэрт нээлттэй." }
+  };
+
+  const CH_LATIN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+/<>';
+  const CH_CYRIL = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЫЭЮЯӨҮ0123456789#%&*+/<>';
+
+  const langBtn = document.getElementById('langToggle');
+  const langFx  = document.getElementById('langFx');
+  let langBusy = false;
+
+  function scramble(el, target, duration, charset){
+    return new Promise(resolve => {
+      const len = target.length;
+      if(reduce || !len){ el.textContent = target; resolve(); return; }
+      const t0 = performance.now();
+      (function step(now){
+        const p = Math.min((now - t0) / duration, 1);
+        const shown = Math.floor(len * (1 - Math.pow(1 - p, 2)));
+        let out = '';
+        for(let i = 0; i < len; i++){
+          const c = target[i];
+          out += (i < shown || c === ' ' || c === '\n' || c === '·' || c === ',' || c === '.') ?
+            c : charset[(Math.random() * charset.length) | 0];
+        }
+        el.textContent = out;
+        if(p < 1) requestAnimationFrame(step);
+        else { el.textContent = target; resolve(); }
+      })(t0);
+    });
+  }
+
+  function applyLanguage(next, animate){
+    const charset = next === 'mn' ? CH_CYRIL : CH_LATIN;
+    const nodes = [...document.querySelectorAll('[data-i18n]')]
+      .filter(n => I18N[n.dataset.i18n]);
+
+    if(!animate || reduce){
+      nodes.forEach(n => { n.textContent = I18N[n.dataset.i18n][next]; });
+    } else {
+      const withPos = nodes.map(n => ({ n, top: n.getBoundingClientRect().top + scrollY }));
+      const tops = withPos.map(o => o.top);
+      const minTop = Math.min.apply(null, tops.concat([0]));
+      const maxTop = Math.max.apply(null, tops.concat([1]));
+      const range = Math.max(maxTop - minTop, 1);
+
+      withPos.forEach(({ n, top }) => {
+        const target = I18N[n.dataset.i18n][next];
+        const delay = ((top - minTop) / range) * 620;
+        setTimeout(() => scramble(n, target, 460, charset), delay);
+      });
+    }
+
+    document.querySelectorAll('[data-i18n-suffix]').forEach(el => {
+      const entry = I18N[el.dataset.i18nSuffix];
+      if(!entry) return;
+      const suf = entry[next];
+      el.dataset.suffix = suf;
+      if(el.dataset.counted === '1'){
+        el.textContent = el.dataset.count + suf;
+      }
+    });
+
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      const entry = I18N[el.dataset.i18nAttr];
+      if(entry) el.setAttribute('data-label', entry[next]);
+    });
+  }
+
+  function toggleLanguage(){
+    if(langBusy) return;
+    langBusy = true;
+
+    const current = root.dataset.lang || 'en';
+    const next = current === 'en' ? 'mn' : 'en';
+    root.dataset.lang = next;
+    root.setAttribute('lang', next);
+    if(langBtn) langBtn.setAttribute('aria-pressed', next === 'mn' ? 'true' : 'false');
+
+    if(!reduce){
+      if(langFx){
+        langFx.classList.remove('sweep');
+        void langFx.offsetWidth;
+        langFx.classList.add('sweep');
+      }
+      root.classList.remove('lang-flux');
+      void root.offsetWidth;
+      root.classList.add('lang-flux');
+    }
+
+    applyLanguage(next, true);
+
+    setTimeout(() => {
+      langBusy = false;
+      if(langFx) langFx.classList.remove('sweep');
+      root.classList.remove('lang-flux');
+    }, 1250);
+  }
+
+  if(langBtn) langBtn.addEventListener('click', toggleLanguage);
+})();
+</script>
+</body>
+</html>
